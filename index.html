@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova Pay — Demo</title>
+<style>
+:root{--bg:#080b09;--panel:#111713;--line:#263129;--green:#b9ff5b;--muted:#9aa69d;--white:#f4f7f3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:22px}.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0 28px}.brand{font-weight:850;font-size:24px;letter-spacing:-1px}.brand span{color:var(--green)}.demo{font-size:12px;color:var(--green);border:1px solid #45602e;padding:6px 10px;border-radius:99px}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px}.eyebrow{color:var(--muted);font-size:13px}.balance{font-size:clamp(36px,7vw,58px);font-weight:800;letter-spacing:-2px;margin:6px 0 18px}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:750;cursor:pointer;background:var(--green);color:#10150c}.btn.secondary{background:#202a22;color:var(--white);border:1px solid #344237}.card{margin-top:20px;min-height:190px;border-radius:20px;padding:22px;background:linear-gradient(135deg,#c3ff6a,#74b93e);color:#14200b;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 16px 45px #0005}.cardtop{display:flex;justify-content:space-between;font-weight:800}.cardnum{letter-spacing:2px;font-size:18px}.cardbottom{display:flex;justify-content:space-between;font-size:12px;font-weight:700}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.sectionhead h2{font-size:18px;margin:0}.activity{display:flex;flex-direction:column;gap:0}.tx{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--line)}.circle{width:42px;height:42px;border-radius:14px;background:#202a22;display:grid;place-items:center;font-weight:800}.txinfo{flex:1}.txname{font-weight:700}.txdate{font-size:12px;color:var(--muted)}.amount{font-weight:800}.positive{color:var(--green)}.notice{font-size:12px;color:var(--muted);margin-top:18px}.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}.quick .panel{padding:18px}.quick strong{font-size:22px;display:block;margin-top:6px}.modal{display:none;position:fixed;inset:0;background:#000b;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}.modalbox h2{margin-top:0}.field{display:block;width:100%;padding:13px;background:#080b09;border:1px solid var(--line);border-radius:10px;color:white;margin:8px 0 15px}.modalactions{display:flex;gap:10px}.footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 0}
+@media(max-width:720px){.wrap{padding:16px}.grid{grid-template-columns:1fr}.panel{padding:19px}.card{min-height:175px}.nav{padding-bottom:18px}}
+</style></head>
+<body><main class="wrap">
+<header class="nav"><div class="brand">nova<span>pay</span></div><span class="demo">DEMO MODE · NO REAL MONEY</span></header>
+<section class="grid">
+<div>
+<div class="panel">
+<div class="eyebrow">Available demo balance</div><div class="balance" id="balance">$2,480.50</div>
+<div class="actions"><button class="btn" onclick="openModal('send')">↗ Send</button><button class="btn secondary" onclick="openModal('request')">＋ Request</button><button class="btn secondary" onclick="openModal('add')">Add demo funds</button></div>
+<div class="card"><div class="cardtop"><span>NOVA PAY</span><span>◉</span></div><div class="cardnum">•••• &nbsp; •••• &nbsp; •••• &nbsp; 2048</div><div class="cardbottom"><span>DEMO MEMBER</span><span>VIRTUAL CARD · PREVIEW</span></div></div>
+<p class="notice">Card preview only. No card number or payment functionality is active.</p>
+</div>
+<div class="quick" style="margin-top:18px"><div class="panel"><div class="eyebrow">Money sent</div><strong id="sent">$125.00</strong></div><div class="panel"><div class="eyebrow">Money received</div><strong id="received">$340.00</strong></div></div>
+</div>
+<div class="panel"><div class="sectionhead"><h2>Recent activity</h2><span class="eyebrow">Demo ledger</span></div><div class="activity" id="activity">
+<div class="tx"><div class="circle">↓</div><div class="txinfo"><div class="txname">Paycheck sample</div><div class="txdate">Today · Demo transaction</div></div><div class="amount positive">+$340.00</div></div>
+<div class="tx"><div class="circle">↗</div><div class="txinfo"><div class="txname">Lunch with Jordan</div><div class="txdate">Yesterday · Demo transaction</div></div><div class="amount">−$25.00</div></div>
+<div class="tx"><div class="circle">↗</div><div class="txinfo"><div class="txname">Movie tickets</div><div class="txdate">Oct 17 · Demo transaction</div></div><div class="amount">−$32.00</div></div>
+<div class="tx"><div class="circle">↓</div><div class="txinfo"><div class="txname">Refund sample</div><div class="txdate">Oct 16 · Demo transaction</div></div><div class="amount positive">+$18.00</div></div>
+</div><p class="notice">All balances and activity are fictional sample data stored only in this page. Refreshing resets the demo.</p></div>
+</section><div class="footer">Nova Pay is a prototype concept, not a bank, money transmitter, or active payment service.</div>
+</main>
+<div class="modal" id="modal"><div class="modalbox"><h2 id="modaltitle">Send demo money</h2><form id="form"><label class="eyebrow" id="namelabel">Recipient name</label><input class="field" id="name" placeholder="e.g. Alex" required><label class="eyebrow">Amount (USD)</label><input class="field" id="amount" type="number" min="0.01" step="0.01" placeholder="25.00" required><div class="modalactions"><button class="btn" type="submit" id="submitbtn">Confirm demo</button><button class="btn secondary" type="button" onclick="closeModal()">Cancel</button></div></form><p class="notice">This only changes the local demo display. No money moves.</p></div></div>
+<script>
+let balance=2480.50,sent=125,received=340,mode='send';
+const money=n=>n.toLocaleString('en-US',{style:'currency',currency:'USD'});
+function openModal(m){mode=m;document.getElementById('modal').classList.add('open');document.getElementById('modaltitle').textContent=m==='send'?'Send demo money':m==='request'?'Request demo money':'Add demo funds';document.getElementById('namelabel').textContent=m==='add'?'Note (optional)':m==='request'?'Request from':'Recipient name';document.getElementById('name').required=m!=='add';document.getElementById('name').placeholder=m==='add'?'Demo deposit':'Name';document.getElementById('submitbtn').textContent=m==='send'?'Send in demo':m==='request'?'Create demo request':'Add demo funds'}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.getElementById('form').reset()}
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();let name=document.getElementById('name').value.trim()||(mode==='add'?'Demo deposit':'Someone');let amount=Number(document.getElementById('amount').value);if(!Number.isFinite(amount)||amount<=0)return;
+if(mode==='send'&&amount>balance){alert('Demo balance is too low.');return}
+let label,sign,cls,icon;
+if(mode==='send'){balance-=amount;sent+=amount;label='To '+name;sign='−';cls='';icon='↗'}
+else if(mode==='request'){label='Request from '+name;sign='';cls='';icon='＋'}
+else{balance+=amount;received+=amount;label=name||'Demo deposit';sign='+';cls='positive';icon='↓'}
+document.getElementById('balance').textContent=money(balance);document.getElementById('sent').textContent=money(sent);document.getElementById('received').textContent=money(received);
+let row=document.createElement('div');row.className='tx';let c=document.createElement('div');c.className='circle';c.textContent=icon;let info=document.createElement('div');info.className='txinfo';let nm=document.createElement('div');nm.className='txname';nm.textContent=label;let dt=document.createElement('div');dt.className='txdate';dt.textContent='Just now · Demo transaction';info.append(nm,dt);let amt=document.createElement('div');amt.className='amount '+cls;amt.textContent=sign+money(amount);row.append(c,info,amt);document.getElementById('activity').prepend(row);closeModal()});
+</script></body></html>
